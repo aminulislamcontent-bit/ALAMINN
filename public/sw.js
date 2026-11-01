@@ -6,7 +6,7 @@
 //
 // Versioned filename via cache-busting: bump SW_VERSION to invalidate.
 
-const SW_VERSION = "alaminn-v1";
+const SW_VERSION = "alaminn-v2";
 const SHELL_CACHE = `${SW_VERSION}-shell`;
 const ASSET_CACHE = `${SW_VERSION}-assets`;
 const IMAGE_CACHE = `${SW_VERSION}-images`;
@@ -32,7 +32,7 @@ self.addEventListener("activate", (event) => {
     caches.keys().then((keys) =>
       Promise.all(
         keys
-          .filter((key) => !key.startsWith(SW_VERSION))
+          .filter((key) => key.startsWith("alaminn-") && !key.startsWith(`${SW_VERSION}-`))
           .map((key) => caches.delete(key))
       )
     )

@@ -363,7 +363,7 @@ function Sparkline({
   );
 }
 
-export function CommandCenter() {
+export function CommandCenter({ onAuthChange }: { onAuthChange: (isAuthed: boolean) => void }) {
   const [open, setOpen] = useState(false);
   const [tab, setTab] = useState("dashboard");
   const [quickCreate, setQuickCreate] = useState(false);
@@ -394,9 +394,10 @@ export function CommandCenter() {
       if (json?.success && json?.data?.user?.role) {
         setRole(json.data.user.role as UserRole);
         setSessionUser({ name: json.data.user.name, email: json.data.user.email });
+        onAuthChange(true);
       }
     } catch { /* no-op */ }
-  }, []);
+  }, [onAuthChange]);
 
   const fetchDashboard = useCallback(async () => {
     setDataLoading(true);
@@ -407,6 +408,7 @@ export function CommandCenter() {
       if (!res.ok || !json?.success) {
         if (res.status === 401) {
           setRole(null);
+          onAuthChange(false);
           setSessionUser(null);
           setData(null);
         } else if (res.status === 403) {
@@ -422,7 +424,7 @@ export function CommandCenter() {
     } finally {
       setDataLoading(false);
     }
-  }, []);
+  }, [onAuthChange]);
 
   // Initial session check on mount; if logged in, fetch dashboard.
   useEffect(() => {
@@ -489,6 +491,7 @@ export function CommandCenter() {
         return;
       }
       setRole(userRole);
+      onAuthChange(true);
       setSessionUser({ name: json.data.user.name, email: json.data.user.email });
       setLoginPassword("");
       setTab("dashboard");
@@ -498,20 +501,21 @@ export function CommandCenter() {
     } finally {
       setLoginLoading(false);
     }
-  }, [loginEmail, loginPassword, fetchDashboard]);
+  }, [loginEmail, loginPassword, fetchDashboard, onAuthChange]);
 
   const handleLogout = useCallback(async () => {
     try {
       await fetch("/api/v1/auth/logout", { method: "POST", credentials: "include" });
     } catch { /* no-op */ }
     setRole(null);
+    onAuthChange(false);
     setSessionUser(null);
     setData(null);
     setTab("dashboard");
     setLoginEmail("");
     setLoginPassword("");
     setLoginError(null);
-  }, []);
+  }, [onAuthChange]);
 
   // Refresh dashboard data (used after create/approve/etc.).
   const refresh = useCallback(() => {

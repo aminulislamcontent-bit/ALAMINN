@@ -90,7 +90,6 @@ export function ContactProfileSocial() {
                   fill
                   sizes="(max-width: 1024px) 100vw, 42vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                  priority
                   quality={85}
                   placeholder="blur"
                   blurDataURL={PORTRAIT_BLUR}

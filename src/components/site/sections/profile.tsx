@@ -80,7 +80,6 @@ export function Profile() {
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover"
-                  priority
                   quality={85}
                   placeholder="blur"
                   blurDataURL={PORTRAIT_BLUR}

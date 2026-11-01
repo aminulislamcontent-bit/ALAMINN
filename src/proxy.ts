@@ -16,7 +16,7 @@
  *        X-Content-Type-Options:  nosniff
  *        X-Frame-Options:         DENY
  *        Referrer-Policy:         strict-origin-when-cross-origin
- *        Permissions-Policy:      camera/mic/geo/topics disabled
+ *        Permissions-Policy:      camera/geo disabled; same-origin microphone allowed
  *        Content-Security-Policy: strict default-src 'self'
  *        Strict-Transport-Security (production only — would break dev)
  *
@@ -51,7 +51,7 @@ const SECURITY_HEADERS: Record<string, string> = {
   // Lock down client-side feature APIs; allow same-origin microphone for Admin AI Studio STT.
   // Format: feature=(allowlist) — empty allowlist = disabled.
   "Permissions-Policy":
-    "camera=(), microphone=(self), geolocation=(), browsing-topics=(), interest-cohort=()",
+    "camera=(), microphone=(self), geolocation=()",
   // Content-Security-Policy — restricts resource loading to prevent XSS,
   // data exfiltration, and clickjacking. Next.js requires 'unsafe-inline'
   // for styles and 'unsafe-eval' for some dev tooling; in production the
@@ -59,11 +59,11 @@ const SECURITY_HEADERS: Record<string, string> = {
   // policy, migrate to nonce-based CSP (advanced, future work).
   "Content-Security-Policy": [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://static.cloudflareinsights.com",
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: https:",
     "font-src 'self' data:",
-    "connect-src 'self'",
+    "connect-src 'self' https://cloudflareinsights.com",
     "frame-ancestors 'none'",
     "base-uri 'self'",
     "form-action 'self'",
