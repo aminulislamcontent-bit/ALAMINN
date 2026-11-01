@@ -14,32 +14,10 @@ import { WhatsAppChatWidget } from "./whatsapp/whatsapp-chat-widget";
  * link, and the theme toggle.  Mounted once in app/page.tsx inside the
  * CommandCenterBridge so it can imperatively open the Command Center.
  */
-export function SiteChrome() {
+export function SiteChrome({ isAuthed }: { isAuthed: boolean }) {
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [scheduleOpen, setScheduleOpen] = useState(false);
-  const [isAuthed, setIsAuthed] = useState(false);
   const openCommandCenter = useOpenCommandCenter();
-
-  // Check session on mount so we can hide staff-only actions (e.g. the
-  // "Open Command Center" entry in the search palette) from the public.
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        const res = await fetch("/api/v1/auth/session", { credentials: "include" });
-        if (!res.ok) return;
-        const json = await res.json();
-        if (!cancelled && json?.success && json?.data?.user?.role) {
-          setIsAuthed(true);
-        }
-      } catch {
-        // ignore — treated as not authed
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
 
   // Global keyboard shortcuts:
   //   ⌘K / Ctrl+K  → open command palette

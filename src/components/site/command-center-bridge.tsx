@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, createContext, useContext } from "react";
+import { useCallback, createContext, useContext, useState } from "react";
 import { CommandCenter } from "./command-center";
 import { SiteChrome } from "./site-chrome";
 
@@ -35,6 +35,7 @@ export function useOpenCommandCenter(): OpenFn | null {
 }
 
 export function CommandCenterBridge() {
+  const [isAuthed, setIsAuthed] = useState(false);
   // Open is triggered by dispatching a window event — CommandCenter listens
   // for it internally. This keeps the open state owned by the CommandCenter
   // (good for animation/exit transitions) while still allowing external
@@ -47,8 +48,8 @@ export function CommandCenterBridge() {
 
   return (
     <CommandCenterOpenContext.Provider value={open}>
-      <CommandCenter />
-      <SiteChrome />
+      <CommandCenter onAuthChange={setIsAuthed} />
+      <SiteChrome isAuthed={isAuthed} />
     </CommandCenterOpenContext.Provider>
   );
 }

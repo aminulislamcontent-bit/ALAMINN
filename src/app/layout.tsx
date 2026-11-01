@@ -202,25 +202,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        {/*
-          Preload the primary brand portrait — the LCP candidate and the
-          image referenced in OG/Twitter metadata. `fetchPriority="high"`
-          tells the browser to start the fetch before the profile section
-          hydrates.
-
-          next/image with `priority` on the profile section's portrait
-          also emits its own preload (for the optimized /_next/image
-          URL). This static-URL preload covers the OG image fetch path
-          and any non-optimized consumer.
-        */}
-        <link
-          rel="preload"
-          as="image"
-          href="/brand/portrait.jpg"
-          fetchPriority="high"
-        />
-      </head>
       <body
         className={`${inter.variable} ${manrope.variable} ${dmSerif.variable} relative font-body antialiased bg-background text-foreground`}
       >
