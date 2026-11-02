@@ -11,7 +11,7 @@ import {
   Globe2, MapPin, BookOpen, Award, Library, UserSquare2, Microscope,
   FlaskConical, CalendarDays, GraduationCap, ClipboardList, HelpCircle, Mail,
   MessageCircle, Share2, Inbox, UserRound, CalendarClock as CalIcon, Megaphone, ListChecks,
-  Activity, Sparkles, Briefcase, Workflow, Kanban, SearchCheck, PenLine, Mails, ChartNoAxesCombined, Clapperboard, MessagesSquare,
+  Activity, Sparkles, Briefcase, Workflow, Kanban, SearchCheck, PenLine, Mails, ChartNoAxesCombined, Clapperboard, MessagesSquare, Plug,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -139,6 +139,7 @@ const NAV_GROUPS: {
       { href: "/admin/audit-logs", label: "Audit Logs", icon: ScrollText },
       { href: "/admin/roles", label: "Roles & Perms", icon: UserCog },
       { href: "/admin/users", label: "Users", icon: Users },
+      { href: "/admin/integrations", label: "Integration Hub", icon: Plug },
       { href: "/admin/settings", label: "Settings", icon: Settings },
     ],
   },

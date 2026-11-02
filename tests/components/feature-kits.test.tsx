@@ -11,6 +11,7 @@ import VideoKit from "@/components/admin/kits/video";
 import EmailKit from "@/components/admin/kits/email";
 import SocialKit from "@/components/admin/kits/social";
 import ChatKit from "@/components/admin/kits/chat";
+import IntegrationsKit from "@/components/admin/kits/integrations";
 import { LiveSupportWidget } from "@/components/site/live-support-widget";
 const fetchMock = vi.fn();
 vi.mock("next/navigation", () => ({ useSearchParams: () => new URLSearchParams(), usePathname: () => "/" }));
@@ -28,6 +29,10 @@ function fixture(url: string) {
   if (url.includes("/email-builder")) return { campaigns: [email], audiences: [{ interest: null, _count: { id: 3 } }], parentCampaigns: [campaign], stats: [], emailConfigured: false, siteUrl: "https://alaminn.info" };
   if (url.includes("/social-scheduler")) return { posts: [], accounts: [], campaigns: [campaign], publishingEnabled: false, cronConfigured: true };
   if (url.includes("/live-chat")) return [];
+  if (url.includes("/integrations")) return { categories: ["AI & Agents", "Messaging & SMS"], integrations: [
+    { id: "openrouter", name: "OpenRouter", url: "https://openrouter.ai", category: "AI & Agents", mode: "adapter", license: "proprietary API", language: "REST", summary: "Unified LLM gateway.", integrationNote: "Native adapter using the official API.", docsUrl: null, fields: [{ key: "apiKey", label: "OpenRouter API key", secret: true, required: true, placeholder: "sk-or-..." }], connection: { id: "openrouter", enabled: false, values: { apiKey: "" }, configured: false, lastTestAt: null, lastTestOk: null, lastTestMessage: null } },
+    { id: "kdenlive", name: "Kdenlive", url: "https://github.com/KDE/kdenlive", category: "Video & Media", mode: "desktop", license: "GPL-3.0", language: "C++", summary: "Desktop video editor.", integrationNote: "Desktop editor; run separately, not embedded.", docsUrl: null, fields: [], connection: null },
+  ] };
   return {};
 }
 beforeEach(() => { vi.stubGlobal("fetch", fetchMock); fetchMock.mockReset().mockImplementation(async (url: string) => ok(fixture(url))); vi.stubGlobal("ResizeObserver", class { observe() {} unobserve() {} disconnect() {} }); Element.prototype.scrollIntoView = vi.fn(); URL.createObjectURL = vi.fn(() => "blob:test"); URL.revokeObjectURL = vi.fn(); sessionStorage.clear(); });
@@ -39,5 +44,21 @@ describe("all ten feature workspaces render API data", () => {
 describe("feature interactions", () => {
   it("saves a diagram through the API", async () => { render(<DiagramKit />); await screen.findByRole("heading", { level: 1 }); fireEvent.click(screen.getByRole("button", { name: /Save diagram/ })); await waitFor(() => expect(fetchMock.mock.calls.some(([url, init]) => url === "/api/v1/admin/kits/documents" && init?.method === "POST")).toBe(true)); });
   it("reopens email CTA from persisted structured content and disables unconfigured sending", async () => { render(<EmailKit />); fireEvent.click(await screen.findByRole("button", { name: /Review & send/ })); expect(screen.getByDisplayValue("Visit")).toBeInTheDocument(); expect(screen.getByDisplayValue("https://alaminn.info")).toBeInTheDocument(); expect(screen.getByRole("button", { name: /Queue campaign/ })).toBeDisabled(); });
+  it("renders the Integration Hub and opens the configure dialog for a connectable adapter", async () => {
+    render(<IntegrationsKit />);
+    expect(await screen.findByRole("heading", { level: 1, name: "Integration Hub" })).toBeInTheDocument();
+    expect(screen.getByText("OpenRouter")).toBeInTheDocument();
+    expect(screen.getByText("Kdenlive")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: /Configure/ }));
+    expect(await screen.findByRole("dialog")).toBeInTheDocument();
+    expect(screen.getByLabelText(/OpenRouter API key/)).toBeInTheDocument();
+  });
+  it("runs a connection test through the API", async () => {
+    fetchMock.mockImplementation(async (url: string, init?: RequestInit) => url.includes("/integrations/openrouter/test") && init?.method === "POST" ? ok({ ok: true, message: "OpenRouter key is valid.", latencyMs: 10 }) : ok(fixture(url)));
+    render(<IntegrationsKit />);
+    await screen.findByRole("heading", { level: 1 });
+    fireEvent.click(screen.getAllByRole("button", { name: /^Test$/ })[0]);
+    await waitFor(() => expect(fetchMock.mock.calls.some(([url, init]) => String(url).includes("/integrations/openrouter/test") && init?.method === "POST")).toBe(true));
+  });
   it("sends a public support message and retains its conversation token", async () => { fetchMock.mockImplementation(async (url: string, init?: RequestInit) => url === "/api/v1/support" && init?.method === "POST" ? ok({ id: "conversation-1", token: "a".repeat(64) }) : ok({ status: "open", messages: [{ id: "m1", sender: "visitor", senderName: "Visitor", body: "I need help", createdAt: new Date().toISOString() }] })); render(<LiveSupportWidget />); fireEvent.click(screen.getByRole("button", { name: "Open live support" })); fireEvent.change(screen.getByLabelText("Your name"), { target: { value: "Visitor" } }); fireEvent.change(screen.getByLabelText("Your message"), { target: { value: "I need help" } }); fireEvent.click(screen.getByRole("button", { name: "Send message" })); await waitFor(() => expect(sessionStorage.getItem("alaminn-support-conversation")).toContain("conversation-1")); });
 });

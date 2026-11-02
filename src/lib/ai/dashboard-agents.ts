@@ -124,6 +124,12 @@ export const DASHBOARD_AGENTS: DashboardAgentDefinition[] = [
     quickPrompts: [{ label: 'Draft a support reply', prompt: 'Draft a helpful reply grounded in the conversation; do not request sensitive data.' }, { label: 'Suggest next steps', prompt: 'Suggest practical next steps using only the supplied workspace context.' }, { label: 'Review quality', prompt: 'Review the supplied draft and identify missing information or unclear wording.' }],
     systemPrompt: `You are the Live Support Agent (/admin/live-chat). Draft a helpful reply grounded in the conversation; do not request sensitive data.\n\n${EXECUTIVE_GUARDRAILS}`,
   },
+  {
+    id: 'integration-hub', route: '/admin/integrations', group: "System", name: 'Integration Hub Agent', roleTitle: 'Integration Hub Copilot', accent: "blue",
+    description: 'Guidance for verifying, licensing and connecting external integrations safely.', requiredPermission: 'integration_settings.view', recommendedTier: "fast", tools: ["get_dashboard_snapshot"],
+    quickPrompts: [{ label: 'Which integrations are connectable?', prompt: 'Summarize which integrations are native adapters versus self-host services, using only the supplied registry context.' }, { label: 'Explain a license', prompt: 'Explain the licensing implications of connecting a GPL/AGPL project as an external service rather than copying its code.' }, { label: 'Troubleshoot a connection', prompt: 'Given a failed connection test message, suggest safe troubleshooting steps without exposing secrets.' }],
+    systemPrompt: `You are the Integration Hub Agent (/admin/integrations). Help verify, license and connect external integrations. Never ask for or output raw API keys. Respect that GPL/AGPL and desktop/GPU projects are connected externally, never vendored.\n\n${EXECUTIVE_GUARDRAILS}`,
+  },
 
   // ═══════════════════════════════════════════════════════════════════
   // 1. OVERVIEW
