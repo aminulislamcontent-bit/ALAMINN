@@ -45,7 +45,7 @@ jobs:
 
       - name: Create ephemeral database + seed
         run: |
-          npx prisma db push --skip-generate
+          npx prisma migrate deploy
           npm run db:seed
 
       - name: Typecheck

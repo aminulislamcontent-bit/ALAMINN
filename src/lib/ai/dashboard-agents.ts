@@ -30,6 +30,7 @@ export type AgentToolName =
 
 export type DashboardAgentGroup =
   | "Overview"
+  | "Integrated Kits"
   | "CRM"
   | "Content"
   | "Higher Study"
@@ -62,6 +63,74 @@ GLOBAL SAFETY & BRAND RULES:
 - Never ask for or output raw secrets, API keys, passwords, OTPs, or payment credentials.`.trim();
 
 export const DASHBOARD_AGENTS: DashboardAgentDefinition[] = [
+  // Integrated feature-kit copilots: advice only; the kit APIs enforce mutations.
+  {
+    id: 'diagrams', route: '/admin/diagrams', group: "Integrated Kits", name: 'Diagram Designer Agent', roleTitle: 'Diagram Designer Copilot', accent: "blue",
+    description: 'Context-aware guidance for the diagram designer workspace.', requiredPermission: 'ai_tasks.view', recommendedTier: "fast", tools: ["get_dashboard_snapshot"],
+    quickPrompts: [{ label: 'Clarify a process diagram', prompt: 'Review the supplied diagram brief and suggest clear steps and decision points.' }, { label: 'Suggest next steps', prompt: 'Suggest practical next steps using only the supplied workspace context.' }, { label: 'Review quality', prompt: 'Review the supplied draft and identify missing information or unclear wording.' }],
+    systemPrompt: `You are the Diagram Designer Agent (/admin/diagrams). Review the supplied diagram brief and suggest clear steps and decision points.\n\n${EXECUTIVE_GUARDRAILS}`,
+  },
+  {
+    id: 'crm-pipeline', route: '/admin/crm', group: "Integrated Kits", name: 'CRM Pipeline Agent', roleTitle: 'CRM Pipeline Copilot', accent: "blue",
+    description: 'Context-aware guidance for the crm pipeline workspace.', requiredPermission: 'opportunities.view', recommendedTier: "fast", tools: ["get_dashboard_snapshot"],
+    quickPrompts: [{ label: 'Review pipeline bottlenecks', prompt: 'Suggest next actions for the visible pipeline stages without inventing deal data.' }, { label: 'Suggest next steps', prompt: 'Suggest practical next steps using only the supplied workspace context.' }, { label: 'Review quality', prompt: 'Review the supplied draft and identify missing information or unclear wording.' }],
+    systemPrompt: `You are the CRM Pipeline Agent (/admin/crm). Suggest next actions for the visible pipeline stages without inventing deal data.\n\n${EXECUTIVE_GUARDRAILS}`,
+  },
+  {
+    id: 'marketing-kit', route: '/admin/marketing', group: "Integrated Kits", name: 'Marketing Campaign Agent', roleTitle: 'Marketing Campaign Copilot', accent: "blue",
+    description: 'Context-aware guidance for the marketing campaign workspace.', requiredPermission: 'social.view', recommendedTier: "fast", tools: ["get_dashboard_snapshot"],
+    quickPrompts: [{ label: 'Plan a campaign', prompt: 'Draft a permission-based campaign plan with audience, channels and measurable goals.' }, { label: 'Suggest next steps', prompt: 'Suggest practical next steps using only the supplied workspace context.' }, { label: 'Review quality', prompt: 'Review the supplied draft and identify missing information or unclear wording.' }],
+    systemPrompt: `You are the Marketing Campaign Agent (/admin/marketing). Draft a permission-based campaign plan with audience, channels and measurable goals.\n\n${EXECUTIVE_GUARDRAILS}`,
+  },
+  {
+    id: 'seo-audit', route: '/admin/seo-dashboard', group: "Integrated Kits", name: 'SEO Audit Agent', roleTitle: 'SEO Audit Copilot', accent: "blue",
+    description: 'Context-aware guidance for the seo audit workspace.', requiredPermission: 'articles.view', recommendedTier: "fast", tools: ["get_dashboard_snapshot"],
+    quickPrompts: [{ label: 'Explain audit findings', prompt: 'Explain the visible on-page audit findings and prioritize fixes; do not claim ranking data.' }, { label: 'Suggest next steps', prompt: 'Suggest practical next steps using only the supplied workspace context.' }, { label: 'Review quality', prompt: 'Review the supplied draft and identify missing information or unclear wording.' }],
+    systemPrompt: `You are the SEO Audit Agent (/admin/seo-dashboard). Explain the visible on-page audit findings and prioritize fixes; do not claim ranking data.\n\n${EXECUTIVE_GUARDRAILS}`,
+  },
+  {
+    id: 'humanizer-kit', route: '/admin/ai-assistant/humanizer', group: "Integrated Kits", name: 'Content Humanizer Agent', roleTitle: 'Content Humanizer Copilot', accent: "blue",
+    description: 'Context-aware guidance for the content humanizer workspace.', requiredPermission: 'ai_tasks.view', recommendedTier: "fast", tools: ["get_dashboard_snapshot"],
+    quickPrompts: [{ label: 'Improve clarity', prompt: 'Edit the supplied text for clarity while preserving facts, names and numbers.' }, { label: 'Suggest next steps', prompt: 'Suggest practical next steps using only the supplied workspace context.' }, { label: 'Review quality', prompt: 'Review the supplied draft and identify missing information or unclear wording.' }],
+    systemPrompt: `You are the Content Humanizer Agent (/admin/ai-assistant/humanizer). Edit the supplied text for clarity while preserving facts, names and numbers.\n\n${EXECUTIVE_GUARDRAILS}`,
+  },
+  {
+    id: 'email-kit', route: '/admin/email-builder', group: "Integrated Kits", name: 'Email Campaign Agent', roleTitle: 'Email Campaign Copilot', accent: "blue",
+    description: 'Context-aware guidance for the email campaign workspace.', requiredPermission: 'newsletter.view', recommendedTier: "fast", tools: ["get_dashboard_snapshot"],
+    quickPrompts: [{ label: 'Draft an email', prompt: 'Draft a concise email with a clear CTA; do not invent offers or send messages.' }, { label: 'Suggest next steps', prompt: 'Suggest practical next steps using only the supplied workspace context.' }, { label: 'Review quality', prompt: 'Review the supplied draft and identify missing information or unclear wording.' }],
+    systemPrompt: `You are the Email Campaign Agent (/admin/email-builder). Draft a concise email with a clear CTA; do not invent offers or send messages.\n\n${EXECUTIVE_GUARDRAILS}`,
+  },
+  {
+    id: 'analytics-kit', route: '/admin/analytics-dashboard', group: "Integrated Kits", name: 'System Analytics Agent', roleTitle: 'System Analytics Copilot', accent: "blue",
+    description: 'Context-aware guidance for the system analytics workspace.', requiredPermission: 'dashboard.view', recommendedTier: "fast", tools: ["get_dashboard_snapshot"],
+    quickPrompts: [{ label: 'Interpret analytics', prompt: 'Interpret only the supplied analytics snapshot and disclose missing data.' }, { label: 'Suggest next steps', prompt: 'Suggest practical next steps using only the supplied workspace context.' }, { label: 'Review quality', prompt: 'Review the supplied draft and identify missing information or unclear wording.' }],
+    systemPrompt: `You are the System Analytics Agent (/admin/analytics-dashboard). Interpret only the supplied analytics snapshot and disclose missing data.\n\n${EXECUTIVE_GUARDRAILS}`,
+  },
+  {
+    id: 'video-kit', route: '/admin/video-studio', group: "Integrated Kits", name: 'Video Storyboard Agent', roleTitle: 'Video Storyboard Copilot', accent: "blue",
+    description: 'Context-aware guidance for the video storyboard workspace.', requiredPermission: 'ai_tasks.view', recommendedTier: "fast", tools: ["get_dashboard_snapshot"],
+    quickPrompts: [{ label: 'Plan a video', prompt: 'Create a timed storyboard with visual direction and voiceover; do not claim rendered video.' }, { label: 'Suggest next steps', prompt: 'Suggest practical next steps using only the supplied workspace context.' }, { label: 'Review quality', prompt: 'Review the supplied draft and identify missing information or unclear wording.' }],
+    systemPrompt: `You are the Video Storyboard Agent (/admin/video-studio). Create a timed storyboard with visual direction and voiceover; do not claim rendered video.\n\n${EXECUTIVE_GUARDRAILS}`,
+  },
+  {
+    id: 'social-kit', route: '/admin/social-scheduler', group: "Integrated Kits", name: 'Social Scheduler Agent', roleTitle: 'Social Scheduler Copilot', accent: "blue",
+    description: 'Context-aware guidance for the social scheduler workspace.', requiredPermission: 'social.view', recommendedTier: "fast", tools: ["get_dashboard_snapshot"],
+    quickPrompts: [{ label: 'Plan social content', prompt: 'Draft posts for review; never claim a post was published without provider confirmation.' }, { label: 'Suggest next steps', prompt: 'Suggest practical next steps using only the supplied workspace context.' }, { label: 'Review quality', prompt: 'Review the supplied draft and identify missing information or unclear wording.' }],
+    systemPrompt: `You are the Social Scheduler Agent (/admin/social-scheduler). Draft posts for review; never claim a post was published without provider confirmation.\n\n${EXECUTIVE_GUARDRAILS}`,
+  },
+  {
+    id: 'support-kit', route: '/admin/live-chat', group: "Integrated Kits", name: 'Live Support Agent', roleTitle: 'Live Support Copilot', accent: "blue",
+    description: 'Context-aware guidance for the live support workspace.', requiredPermission: 'social.inbox.reply', recommendedTier: "fast", tools: ["get_dashboard_snapshot"],
+    quickPrompts: [{ label: 'Draft a support reply', prompt: 'Draft a helpful reply grounded in the conversation; do not request sensitive data.' }, { label: 'Suggest next steps', prompt: 'Suggest practical next steps using only the supplied workspace context.' }, { label: 'Review quality', prompt: 'Review the supplied draft and identify missing information or unclear wording.' }],
+    systemPrompt: `You are the Live Support Agent (/admin/live-chat). Draft a helpful reply grounded in the conversation; do not request sensitive data.\n\n${EXECUTIVE_GUARDRAILS}`,
+  },
+  {
+    id: 'integration-hub', route: '/admin/integrations', group: "System", name: 'Integration Hub Agent', roleTitle: 'Integration Hub Copilot', accent: "blue",
+    description: 'Guidance for verifying, licensing and connecting external integrations safely.', requiredPermission: 'integration_settings.view', recommendedTier: "fast", tools: ["get_dashboard_snapshot"],
+    quickPrompts: [{ label: 'Which integrations are connectable?', prompt: 'Summarize which integrations are native adapters versus self-host services, using only the supplied registry context.' }, { label: 'Explain a license', prompt: 'Explain the licensing implications of connecting a GPL/AGPL project as an external service rather than copying its code.' }, { label: 'Troubleshoot a connection', prompt: 'Given a failed connection test message, suggest safe troubleshooting steps without exposing secrets.' }],
+    systemPrompt: `You are the Integration Hub Agent (/admin/integrations). Help verify, license and connect external integrations. Never ask for or output raw API keys. Respect that GPL/AGPL and desktop/GPU projects are connected externally, never vendored.\n\n${EXECUTIVE_GUARDRAILS}`,
+  },
+
   // ═══════════════════════════════════════════════════════════════════
   // 1. OVERVIEW
   // ═══════════════════════════════════════════════════════════════════
@@ -1112,6 +1181,7 @@ export function resolveDashboardAgent(pathname: string): DashboardAgentDefinitio
 
 export const DASHBOARD_AGENT_GROUPS: DashboardAgentGroup[] = [
   "Overview",
+  "Integrated Kits",
   "CRM",
   "Content",
   "Higher Study",

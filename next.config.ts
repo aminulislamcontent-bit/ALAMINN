@@ -11,6 +11,8 @@ const nextConfig: NextConfig = {
   // Tree-shake and optimize large icon/utility libraries so only the
   // icons actually used end up in the client bundle.
   experimental: {
+    // Keep production compilation within small-server memory budgets.
+    cpus: 2,
     optimizePackageImports: ["lucide-react", "framer-motion", "date-fns"],
   },
   // Compress responses with gzip + brotli where the client supports it.

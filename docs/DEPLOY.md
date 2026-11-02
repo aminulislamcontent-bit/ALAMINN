@@ -1,3 +1,8 @@
+> **Integrated Kits release:** see [`INTEGRATED-KITS.md`](./INTEGRATED-KITS.md)
+> for the ten workspaces, worker configuration and verification boundaries.
+> Database rollout now uses provider-specific migration histories; see
+> [`prisma/migrations/README.md`](../prisma/migrations/README.md).
+
 <!--
   Title: Alaminn.info — Canonical Deployment (Ubuntu 24.04 LTS)
   Canonical Stack: Next.js 16 · PostgreSQL 17 · Redis 7 · BullMQ · Auth.js · Caddy 2 · systemd · Ubuntu 24.04 LTS

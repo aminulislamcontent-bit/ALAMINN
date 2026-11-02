@@ -56,29 +56,18 @@ echo "→ [2/5] Generating Prisma client..."
 "$BUN_BIN" run db:generate
 
 # ── 3. Push schema to database ────────────────────────────────────
-echo "→ [3/5] Pushing Prisma schema to database..."
+echo "→ [3/5] Applying versioned database migrations..."
 
-# Swap Prisma schema provider based on the DATABASE_URL found in .env.
-# Prisma auto-loads .env at runtime, but the shell does NOT export it, so we
-# grep it out explicitly. If production uses MariaDB/MySQL (mysql:// URL),
-# we swap in prisma/schema.mysql.prisma (provider="mysql" with explicit
-# @db.* column types so long text is not truncated to VARCHAR(191)). If the
-# URL is `file:` (SQLite — local dev), the default schema.prisma is already
-# correct and is left in place. This mirrors the swap that
-# scripts/deploy-cyberpanel.sh performs and fixes the bug where deploy.sh
-# ran `prisma db push` against the SQLite schema even though .env pointed
-# at MariaDB.
-DATABASE_URL="$(grep -E '^DATABASE_URL=' .env 2>/dev/null | head -n1 | sed -E 's/^DATABASE_URL=//; s/^"(.*)"$/\1/' || true)"
+# Provider-specific configs keep SQLite and MySQL migration histories separate.
+# Never overwrite schema.prisma or use --accept-data-loss on a live database.
+DATABASE_URL="$(node -r dotenv/config -p 'process.env.DATABASE_URL || ""')"
 if [[ "$DATABASE_URL" == mysql://* ]]; then
-  echo "  [deploy] Detected MySQL DATABASE_URL — swapping to schema.mysql.prisma"
-  cp -f prisma/schema.mysql.prisma prisma/schema.prisma
-elif [[ "$DATABASE_URL" == file:* ]]; then
-  echo "  [deploy] Detected SQLite DATABASE_URL — keeping default schema.prisma"
+  npx prisma migrate deploy --config prisma.config.mysql.ts
+elif [[ "$DATABASE_URL" == file:* || "$DATABASE_URL" == libsql://* ]]; then
+  "$BUN_BIN" run db:migrate:deploy
 else
-  echo "  [deploy] Warning: DATABASE_URL not found in .env (or unrecognized format). Using current schema.prisma as-is."
+  echo "DATABASE_URL must be a MySQL, libSQL or absolute file: URL." >&2; exit 1
 fi
-
-"$BUN_BIN" run db:push
 
 # ── 3b. Optional seed ─────────────────────────────────────────────
 if [[ $DO_SEED -eq 1 ]]; then

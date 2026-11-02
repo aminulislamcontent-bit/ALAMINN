@@ -249,6 +249,7 @@ const MATRIX: Partial<Record<UserRole, Permission[]>> = {
     "meetings.update",
     "ai_tasks.view",
     "ai_tasks.create",
+    "ai_tasks.update",
     "articles.view",
     "newsletter.view",
   ],
@@ -306,6 +307,7 @@ const MATRIX: Partial<Record<UserRole, Permission[]>> = {
     "case_studies.update",
     "newsletter.view",
     "newsletter.send",
+    "ai_tasks.view", "ai_tasks.create", "ai_tasks.update",
   ],
   MARKETING_MANAGER: [
     "dashboard.view", "social.view", "social.inbox.reply", "social.content.manage", "social.content.publish",
@@ -323,6 +325,9 @@ const MATRIX: Partial<Record<UserRole, Permission[]>> = {
     "newsletter.view",
     "newsletter.export",
     "newsletter.send",
+    "ai_tasks.view", "ai_tasks.create", "ai_tasks.update",
+    "social.automation.manage",
+    "ai_tasks.view", "ai_tasks.create", "ai_tasks.update",
   ],
   PROJECT_MANAGER: [
     "dashboard.view",

@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
-import { AdminShell } from "@/components/admin/admin-shell";
 import { PageHeader, EmptyState } from "@/components/admin/page-primitives";
 import { adminFetch, fmtDate } from "@/components/admin/lib";
 import { Button } from "@/components/ui/button";
@@ -64,9 +63,7 @@ const FREE_PROVIDERS = [
 
 export default function AiAssistantPage() {
   return (
-    <AdminShell>
       <AiAssistantInner />
-    </AdminShell>
   );
 }
 

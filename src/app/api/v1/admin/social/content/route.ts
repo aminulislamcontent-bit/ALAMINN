@@ -1,15 +1,14 @@
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 import { requirePermission } from "@/lib/auth";
-import { ok, fail, readJson, writeAudit, pagination } from "@/lib/admin-api";
 import { db } from "@/lib/db";
-export const dynamic = "force-dynamic"; export const runtime = "nodejs";
-export async function GET(req: NextRequest) { const g = await requirePermission(req, "social.view"); if (g.denied) return g.response;
-  const [contents, campaigns] = await Promise.all([db.socialContent.findMany({ orderBy: { createdAt: "desc" }, take: 100, include: { targets: { include: { account: { select: { displayName: true, platform: true } } } } } }), db.socialCampaign.findMany({ orderBy: { createdAt: "desc" } })]); return ok({ contents, campaigns }); }
-export async function POST(req: NextRequest) { const g = await requirePermission(req, "social.content.manage"); if (g.denied) return g.response;
-  const b = await readJson<Record<string, unknown>>(req);
-  if (b?.campaign === true) { if (!b.name) return fail("name required", ["name_required"], 400); const c = await db.socialCampaign.create({ data: { name: String(b.name), objective: (b.objective as string) || null, pillar: (b.pillar as string) || null, audience: (b.audience as string) || null, status: String(b.status || "draft") } }); return ok(c, "", {}, 201); }
-  if (!b?.title || !b?.body) return fail("title + body required", ["missing"], 400);
-  const c = await db.socialContent.create({ data: { title: String(b.title), body: String(b.body), campaignId: (b.campaignId as string) || null, variants: (b.variants as string) || null, hashtags: (b.hashtags as string) || null, cta: (b.cta as string) || null, mediaUrls: (b.mediaUrls as string) || null, language: String(b.language || "en"), status: String(b.status || "draft"), scheduledAt: b.scheduledAt ? new Date(String(b.scheduledAt)) : null, createdById: g.session.userId, approvedById: b.status === "approved" || b.status === "scheduled" ? g.session.userId : null } });
-  const accountIds = Array.isArray(b.accountIds) ? (b.accountIds as string[]) : [];
-  for (const aid of accountIds) await db.socialContentTarget.create({ data: { contentId: c.id, accountId: aid } }).catch(() => null);
-  await writeAudit(g.session, "social_content_saved", "SocialContent", c.id, { status: c.status }); return ok(c, "", {}, 201); }
+import { kitAction, kitRead, kitOk, kitError, kitAudit } from "@/lib/kits/api";
+import { postSchema, validateTargets } from "@/lib/kits/social";
+export const dynamic = "force-dynamic";
+export async function GET(req: NextRequest) { return kitRead(req, "social.view", async () => { const [posts, accounts, campaigns, state] = await Promise.all([db.socialContent.findMany({ include: { targets: { include: { account: { select: { id: true, displayName: true, platform: true } } } }, campaign: { select: { name: true } } }, orderBy: { createdAt: "desc" }, take: 200 }), db.socialAccount.findMany({ select: { id: true, displayName: true, platform: true, status: true, tokenEncrypted: true, capabilities: true } }), db.socialCampaign.findMany({ select: { id: true, name: true } }), db.socialAutomationState.findUnique({ where: { id: "global" } })]); return kitOk({ posts, accounts: accounts.map(a => ({ ...a, tokenEncrypted: undefined, hasToken: !!a.tokenEncrypted })), campaigns, publishingEnabled: state?.publishingEnabled || false, cronConfigured: !!process.env.CRON_SECRET }); }); }
+export async function POST(req: NextRequest) { return kitAction(req, "social.content.manage", postSchema, async (data, session) => {
+  if (data.status === "scheduled") { const guard = await requirePermission(req, "social.content.publish"); if (guard.denied) return guard.response; if (!data.scheduledAt || new Date(data.scheduledAt).getTime() <= Date.now()) return kitError("Choose a future date and time."); const error = await validateTargets(data.accountIds, data.mediaUrls); if (error) return kitError(error); }
+  { const error = await validateTargets(data.accountIds, data.mediaUrls, data.status === "scheduled"); if (error) return kitError(error); }
+  if (data.campaignId && !await db.socialCampaign.findUnique({ where: { id: data.campaignId } })) return kitError("Campaign not found.");
+  const row = await db.$transaction(async tx => { const c = await tx.socialContent.create({ data: { title: data.title, body: data.body, campaignId: data.campaignId, status: data.status, scheduledAt: data.scheduledAt ? new Date(data.scheduledAt) : null, mediaUrls: JSON.stringify(data.mediaUrls), createdById: session.userId, approvedById: data.status === "scheduled" ? session.userId : null } }); if (data.accountIds.length) await tx.socialContentTarget.createMany({ data: [...new Set(data.accountIds)].map(accountId => ({ contentId: c.id, accountId })) }); return c; });
+  await kitAudit(session, "social.scheduler.save", "SocialContent", row.id, { status: row.status }); return kitOk(row, data.status === "scheduled" ? "Post approved and scheduled. Publishing must be enabled and the cron must run." : "Draft saved.", 201);
+}); }

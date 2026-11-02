@@ -1,0 +1,592 @@
+{
+  "auditDate": "2026-11-02",
+  "repositoryBaseline": "02eb68762ac4e3712eb9025ea3c8a7d9fa28760f",
+  "scope": {
+    "expanded": 52,
+    "priorOnly": 27,
+    "unique": 79,
+    "githubQueried": 59,
+    "githubAvailable": 56,
+    "githubUnavailable": 3,
+    "webEntries": 20,
+    "webFetched": 19,
+    "web403": 1
+  },
+  "files": [
+    {
+      "path": "assessments.json",
+      "sha256": "058d1f8e01c10dd186506f48f929c90bc4c526c986cc548fd99c05f23b4fe72a",
+      "bytes": 98016
+    },
+    {
+      "path": "baseline-hashes.json",
+      "sha256": "4d6b667b7c551c48235fa2bdd87c45e01b7ba386528c588b1a1c268ecd992daa",
+      "bytes": 152781
+    },
+    {
+      "path": "build_assessments.py",
+      "sha256": "8f759ef0acea4c63bede1f3b1d0ca7d201c68d351feda12dd65d0cafc219422e",
+      "bytes": 44306
+    },
+    {
+      "path": "collect-github.py",
+      "sha256": "5a7a4f296636822846ca7ccbd96536cef513b039b20e1dedd2a044718ffe160e",
+      "bytes": 2747
+    },
+    {
+      "path": "collect-prior-github.py",
+      "sha256": "8952af08f4171c92eedf45409b1c75e7295491b0285bb0091c4d4883d4e76369",
+      "bytes": 2759
+    },
+    {
+      "path": "collect-targeted.py",
+      "sha256": "479636beccdf0c9caeb66d8f07e4f6651d1d24cc9ed2e9fcc0f64b2e820f1703",
+      "bytes": 3865
+    },
+    {
+      "path": "compact-apps1.txt",
+      "sha256": "e945c74a6e7d54c0ee8290f2f103914b1f231ff0143c0ccafc6509558aa3b9e2",
+      "bytes": 69621
+    },
+    {
+      "path": "compact-apps2.txt",
+      "sha256": "5bd8b399ce60c9e06bd06e87a30d2b20adb32d51f1b795f4d0944176021ba41e",
+      "bytes": 66647
+    },
+    {
+      "path": "compact-creative.txt",
+      "sha256": "7fabeeedc1bf43b8588fbfa6be485805b4623cc29c776820868e651e42dde117",
+      "bytes": 57732
+    },
+    {
+      "path": "compact-research.txt",
+      "sha256": "d3ad4cfbb204d55479c72cecbef37466337eccbb7e9d3e2ce2dddeaf456d0c95",
+      "bytes": 67070
+    },
+    {
+      "path": "compact-skills1.txt",
+      "sha256": "ce2b9422039a46609fe469d167e1ebd83558d1a9e660b0b6ef1945188be9a11b",
+      "bytes": 39470
+    },
+    {
+      "path": "compact-skills2.txt",
+      "sha256": "f4d6119d56c2ffad4fec7d4ca0c5ed6210e318a454459f25ba7a7b65784fcb99",
+      "bytes": 19311
+    },
+    {
+      "path": "compact.py",
+      "sha256": "8c7cd6b10030f6b1840b7c9db6ed9de9e0620b8bf24551b913f0df9e6fc8ca83",
+      "bytes": 1748
+    },
+    {
+      "path": "digest-a1.txt",
+      "sha256": "ac7a1dcde86c803de7c0ae9c0c8dae6348f4de038824ac5cff1a1d9a87dc158b",
+      "bytes": 40004
+    },
+    {
+      "path": "digest-a2.txt",
+      "sha256": "f0fa07ec46bc065cf74e4640bf05e189d2d8acac84a8fe7b105b41cf15661564",
+      "bytes": 41490
+    },
+    {
+      "path": "digest-b.txt",
+      "sha256": "d9d1496aeea05eb26d3b70b92b2bd10f84edfdb41cec13183938d4c4a8f20f99",
+      "bytes": 52729
+    },
+    {
+      "path": "digest-d1.txt",
+      "sha256": "4663666dab1d62e6c29447b7d9dd35363b0beee244805a44b7e0b43600a8dee8",
+      "bytes": 71698
+    },
+    {
+      "path": "digest-d2.txt",
+      "sha256": "2278e19de8d676d70f5a8c912e10d7de70984e9aa39a712e3ed0a119f486baab",
+      "bytes": 84103
+    },
+    {
+      "path": "digest-e.txt",
+      "sha256": "c5d8abb9d74dfa4f394d03b637a6b6d7a71323bb5398ace2d4817ee459be95a5",
+      "bytes": 53766
+    },
+    {
+      "path": "digest.py",
+      "sha256": "6055ecaaaa6e6e4fcba3c75c319e0c4d1638b58213739300a52983af79a1a75b",
+      "bytes": 1887
+    },
+    {
+      "path": "github/ai-memory/metadata.json",
+      "sha256": "ce40b435566ab1b53f2b6c966d8197392acf33f7868b39a3413134798d4e86e8",
+      "bytes": 263
+    },
+    {
+      "path": "github/android-skills/metadata.json",
+      "sha256": "e88b119b0c8560a0e841433956e8e678f91660e06d0202d75a5d3253a4680448",
+      "bytes": 624897
+    },
+    {
+      "path": "github/anyps5/metadata.json",
+      "sha256": "a3711d109ab8ff3a776e866f87180fbac6bf30e5a9538bbf27090b1973054759",
+      "bytes": 570573
+    },
+    {
+      "path": "github/anyps5/targeted/docs__dev__ARCHITECTURE.md.json",
+      "sha256": "160f1fc2326a3c551581c632cd2543ae7172660984870254ef3936ac8b69eb2a",
+      "bytes": 62231
+    },
+    {
+      "path": "github/anyps5/targeted/docs__dev__BUILD.md.json",
+      "sha256": "b8a49ad0863a4453a43978f76011549ab675af0d661fe4f02fffbf9a560c42c9",
+      "bytes": 71982
+    },
+    {
+      "path": "github/anyps5/targeted/docs__user__USAGE.md.json",
+      "sha256": "ee7d5524b70bf2be57cd28d5da0c1543fc832815112d70612c21dc7a0b815c6c",
+      "bytes": 114478
+    },
+    {
+      "path": "github/billion-context/metadata.json",
+      "sha256": "46705489123ba3004e7d224dfbb8ae7f5c6fbdfc52420650bdba2c4ad9340535",
+      "bytes": 511302
+    },
+    {
+      "path": "github/billion-context/targeted/reference__architecture.md.json",
+      "sha256": "c0d66420178835403ef33b67bc5b741ad5201431e01ae24812afd33983bab26f",
+      "bytes": 26151
+    },
+    {
+      "path": "github/claude-plugins/metadata.json",
+      "sha256": "b78a6436b42e64a74aa92fc1aca04a58a9bfab31b0f280489dbd655d4db5b414",
+      "bytes": 387316
+    },
+    {
+      "path": "github/claude-plugins/targeted/plugins__mcp-server-dev__skills__build-mcpb__references__local-security.md.json",
+      "sha256": "9191973960452d85f5e186f776436e6deeda1d49e375d4b0cf0fd9795eaed29f",
+      "bytes": 5769
+    },
+    {
+      "path": "github/claude-plugins/targeted/plugins__plugin-dev__skills__plugin-structure__SKILL.md.json",
+      "sha256": "719f36c167be821caee7df3e023179a2b68a65f730dff6decad9d098b0177f52",
+      "bytes": 15088
+    },
+    {
+      "path": "github/cli-anything/metadata.json",
+      "sha256": "baa10d26ebce0d6c94874fefdc31fce950170e54dc3de398b37527a560230a6e",
+      "bytes": 662485
+    },
+    {
+      "path": "github/container/metadata.json",
+      "sha256": "96e9c771f9d9641fd3245a959225403f8f4f20d2f332f9dee445cb427465d919",
+      "bytes": 143137
+    },
+    {
+      "path": "github/container/targeted/.operator-shared__specs__architecture.md.json",
+      "sha256": "31d673b03381f814b195922ce8e2451c2f9c3df85a2276807195c39acacf8b65",
+      "bytes": 5953
+    },
+    {
+      "path": "github/container/targeted/skills__container__references__permissions.md.json",
+      "sha256": "3970857ea35aba0a0f4cd3b74870a4bcea3df9932864a7c95ae59cedda6d2680",
+      "bytes": 1962
+    },
+    {
+      "path": "github/cursor-plugins/metadata.json",
+      "sha256": "d62a33bc21e1f48718899f65798187e7ff90b0b149393915ac09b31d4c5df1ef",
+      "bytes": 311286
+    },
+    {
+      "path": "github/delegate-router/metadata.json",
+      "sha256": "52258b6825f7b31e0ccf84211058831cc572138eea6aa30ca7bf0fb3ba4c58d2",
+      "bytes": 86796
+    },
+    {
+      "path": "github/diagram-design/metadata.json",
+      "sha256": "9c2e4dc3a92f5ab4c15ce54a1ac0ec14c15a8012a4fa485131398a4cbf2f9eb2",
+      "bytes": 191762
+    },
+    {
+      "path": "github/dify/metadata.json",
+      "sha256": "b622276eeb2f9f2ff726242da7c81c1ea550e0acc0da8d7cae7fcc4f2af928e9",
+      "bytes": 1848854
+    },
+    {
+      "path": "github/ghidra/metadata.json",
+      "sha256": "d65203325039b2fc8f9039266c150843e2bbd64f9df493835a814f2a24384724",
+      "bytes": 2111764
+    },
+    {
+      "path": "github/hyperframes/metadata.json",
+      "sha256": "c2d2fd182f16b4503eb2a38c25fa12eada15c8d03e7501f695b8e2298de11e21",
+      "bytes": 1019852
+    },
+    {
+      "path": "github/karpath/metadata.json",
+      "sha256": "17e3d93a92aab295613299c2c2e12422b92973ed31602fdda3d7be8fc3dd2e2a",
+      "bytes": 289
+    },
+    {
+      "path": "github/kdenlive/metadata.json",
+      "sha256": "89dd98aab308260414d328f0aa70e976442da96bdf32564b025bab2436102ca6",
+      "bytes": 221001
+    },
+    {
+      "path": "github/kdenlive/targeted/CMakeLists.txt.json",
+      "sha256": "64b17106886896d011a3f073ecd7d84f8fb8acf0778b06569f3bd30a9b1b6a6d",
+      "bytes": 9033
+    },
+    {
+      "path": "github/kdenlive/targeted/dev-docs__architecture.md.json",
+      "sha256": "bd7a97e4b19fedb47170c6b1356b0bf9b58c46ce2d6334c7a315ea0f484c914c",
+      "bytes": 2835
+    },
+    {
+      "path": "github/mailcheap/metadata.json",
+      "sha256": "ba91b56d327fa5c4cb228a5f7faed8a2fc6c5a0bae127b040afa5404be9ae11f",
+      "bytes": 221845
+    },
+    {
+      "path": "github/moneyprinter/metadata.json",
+      "sha256": "55f2e5632fb1411f0ef18c9f933ac49e7b1b5656dc028b8918032bddcd0a9f79",
+      "bytes": 244021
+    },
+    {
+      "path": "github/moneyprinter/targeted/config.example.toml.json",
+      "sha256": "1337cf8ab87245deda2a9a954dcbaf74bddbd0226d96cf4f64f55f373977e826",
+      "bytes": 41464
+    },
+    {
+      "path": "github/obs/metadata.json",
+      "sha256": "498113c909d13b17f6f699c06ca21f7ccccdcdf0df2a2cf7e9dc1cb44b508c1c",
+      "bytes": 527661
+    },
+    {
+      "path": "github/obs/targeted/CMakeLists.txt.json",
+      "sha256": "b79589287c5d4001df859029b766238680f65533d5455ea845d0503db1631a34",
+      "bytes": 1108
+    },
+    {
+      "path": "github/open-seo/metadata.json",
+      "sha256": "1cf6bb7f71e01a08eb246ad42b41a5c9cd02e3c0ed9cb44b46e3897af2abc785",
+      "bytes": 263935
+    },
+    {
+      "path": "github/open-seo/targeted/docs__SELF_HOSTING_DOCKER.md.json",
+      "sha256": "8fb54fec1ecf7209b462bcdf6e8dc8318d7baf77a447afaa2223c9abd7b04131",
+      "bytes": 11689
+    },
+    {
+      "path": "github/opencode/metadata.json",
+      "sha256": "93cb72420d88eb3d9a1609315c181b08cbb93fd2761274eb1cdabdc6a5e38628",
+      "bytes": 1150009
+    },
+    {
+      "path": "github/openshorts/metadata.json",
+      "sha256": "4fd6dcc11883c0f0e9adc9dfaf468dd1aaa06af156db9bd178d90d41970bce47",
+      "bytes": 215737
+    },
+    {
+      "path": "github/openshorts/targeted/docs__architecture__agent-access.md.json",
+      "sha256": "1ba8c852af533938f56f145d97cfd1a6f458f75ac4ecf4565c8089f67503631f",
+      "bytes": 7589
+    },
+    {
+      "path": "github/opensms/metadata.json",
+      "sha256": "75083784e71902dd3de39fdd28ed6899284b5616e3d0906bff32d971b05bcba0",
+      "bytes": 67417
+    },
+    {
+      "path": "github/opensms/targeted/app__main.py.json",
+      "sha256": "73baaf37ce8a25301cf704c5733ab0af8fbfa8b7e58e493d2cc6fdff9a8487b4",
+      "bytes": 27509
+    },
+    {
+      "path": "github/pocock-skills/metadata.json",
+      "sha256": "bb82e8b1396644e05d7687d073487b9e283720d1c37fe3be9a130468d2e30998",
+      "bytes": 138091
+    },
+    {
+      "path": "github/pocock-skills/targeted/skills__engineering__improve-codebase-architecture__SKILL.md.json",
+      "sha256": "bf5524fd15bdee83e6ce082bedfa0f93214f6065c51c8fd926bd71ceccc7019d",
+      "bytes": 6299
+    },
+    {
+      "path": "github/pocock-skills/targeted/skills__engineering__tdd__SKILL.md.json",
+      "sha256": "c07e6287b5c95f3913763a0f6a81e8dee3397002d8be3cb0a70faba763c41d78",
+      "bytes": 3820
+    },
+    {
+      "path": "github/postiz/metadata.json",
+      "sha256": "97ed9b88e5e70c7e2f34a77f2fa845ad01aaff28488fc3ca5c6ae11a295224d3",
+      "bytes": 257812
+    },
+    {
+      "path": "github/presenton/metadata.json",
+      "sha256": "1c761ee43f7bfa6b14361923b533dd7abbf77ce44812431486049655e027cd14",
+      "bytes": 989572
+    },
+    {
+      "path": "github/rea/metadata.json",
+      "sha256": "e7ef3fc4f45fd8c7fe5fc8fcbeded79231060a33de5241d584e4df7c5f65871c",
+      "bytes": 971991
+    },
+    {
+      "path": "github/rea/targeted/DISCLAIMER.md.json",
+      "sha256": "c879382df20224442401d61bd4dc345a52b5c66ae90b4e04e4b465f5026861ad",
+      "bytes": 7356
+    },
+    {
+      "path": "github/rea/targeted/docs__installation.md.json",
+      "sha256": "db04ec6350c71531f2255d52769a83c30ef435294acf82db0f641f7b5429be55",
+      "bytes": 114802
+    },
+    {
+      "path": "github/rea/targeted/docs__mcp-contracts.md.json",
+      "sha256": "bc2b7a69fe083f1831cd308e1bb58bf7acbba9335ed8a182a3e5eb285bb57a83",
+      "bytes": 130748
+    },
+    {
+      "path": "github/rescript/metadata.json",
+      "sha256": "a360adf8439ec33f1261dc98328aea8457d0cb699d94c5149c8d119f9f6e9920",
+      "bytes": 194789
+    },
+    {
+      "path": "github/ruflo/metadata.json",
+      "sha256": "85b74d5ed230f2c263262f22d824cb1aed9d94299331221ba9139ac2fa573a2c",
+      "bytes": 935330
+    },
+    {
+      "path": "github/ruflo/targeted/.agents__skills__agent-sandbox__SKILL.md.json",
+      "sha256": "d3b327f88c872d1dd674516ea3e48f5fde94d380d146e49726936f015b150d07",
+      "bytes": 3352
+    },
+    {
+      "path": "github/ruflo/targeted/v3__@claude-flow__cli__package.json.json",
+      "sha256": "04a5ba9758f1859574759c4218ef2cd035b09bb4b3c75eadc9846e17e6521d66",
+      "bytes": 6122
+    },
+    {
+      "path": "github/scientific-skills/metadata.json",
+      "sha256": "9b120f3fba0e4da29c5bf491ad0a6d6afb749976738bf8118c40422fa874b4d5",
+      "bytes": 860636
+    },
+    {
+      "path": "github/scientific-skills/targeted/skills__lab-hardware-cad__SKILL.md.json",
+      "sha256": "b06aa60ab83b5fe9220f09a7368d75245544ff8404c66c4155987fcefaf697e6",
+      "bytes": 23545
+    },
+    {
+      "path": "github/scrapling/metadata.json",
+      "sha256": "6a54e004287beffe78c70d14d80f9454aefcf90f4b190dec414b18b6557cd865",
+      "bytes": 205931
+    },
+    {
+      "path": "github/text-to-cad/metadata.json",
+      "sha256": "33746ca038d58db8c5e91ba87283d6f1bf10d5f30194baa2647801621710bcd0",
+      "bytes": 824587
+    },
+    {
+      "path": "github/voicebox/metadata.json",
+      "sha256": "084b84a775987fcf0d697c5bfc4373b6eab89017ad0554562f3d2b9f57bc6ff6",
+      "bytes": 303594
+    },
+    {
+      "path": "github/voicestudio/metadata.json",
+      "sha256": "2d547f1e328daf4813be384f369abf10e061bffc7cbff994dda878f125f9f073",
+      "bytes": 1265412
+    },
+    {
+      "path": "github/voicestudio/targeted/docs__hardware-notes-tesla-t4.md.json",
+      "sha256": "a68d6e3ad4073624d13432e8ca4f5061d924a5d6997360f9e0675e0caaeda953",
+      "bytes": 2707
+    },
+    {
+      "path": "github/wacrm/metadata.json",
+      "sha256": "39949531e4892644cc4621324b96c43b07124c82539163e2d445e1093dce22d7",
+      "bytes": 116623
+    },
+    {
+      "path": "github-prior/3b1b-videos/metadata.json",
+      "sha256": "dd888c642006198c4d640960a06396ef34b7b034724e2dfbe0757b00fe8986d8",
+      "bytes": 94332
+    },
+    {
+      "path": "github-prior/ai-marketing-crm/metadata.json",
+      "sha256": "54437db951be7db4afd390427b502bd4f3f21425a2af1b37a13c1de1869da190",
+      "bytes": 409
+    },
+    {
+      "path": "github-prior/claude-video/metadata.json",
+      "sha256": "228eed54b10ee8deb9e7f6455b3be0684a60091f653bebf0f10edc354080b174",
+      "bytes": 110848
+    },
+    {
+      "path": "github-prior/cogvideo/metadata.json",
+      "sha256": "401ccb513106296ea85d341b5952dc2190bcd10779e4f1332a7a92e1bf42813f",
+      "bytes": 152618
+    },
+    {
+      "path": "github-prior/deskcomm/metadata.json",
+      "sha256": "d5c0946054626249d8c8c231643e09cce7eaa8a832a3db5f0fa4cdbd5d9c4169",
+      "bytes": 1210562
+    },
+    {
+      "path": "github-prior/domovina-sms/metadata.json",
+      "sha256": "9eabd7da0ed7b078f4fb3a8be88abb4f34478adfa58165d683de482fad955831",
+      "bytes": 192303
+    },
+    {
+      "path": "github-prior/electron-ipc/metadata.json",
+      "sha256": "6c51f495db866ebc909932bc3a478d7ab52893ab1552f01cd9f12dab54aba2b4",
+      "bytes": 64617
+    },
+    {
+      "path": "github-prior/httpsms/metadata.json",
+      "sha256": "e43d84942f2199505cc049d4f7a4a79bc868b6e37efa2226a493da15c2d9fe01",
+      "bytes": 178035
+    },
+    {
+      "path": "github-prior/httpsms-node/metadata.json",
+      "sha256": "dff59f932020120352ea943b9c341e3f8a7dbe5892277a2451b3cbf15aa1b833",
+      "bytes": 64281
+    },
+    {
+      "path": "github-prior/hunyuanvideo/metadata.json",
+      "sha256": "261aacb6d6fc46c2a56ef6a51c0aeda444af1e02033d2ea749383e64050c00cc",
+      "bytes": 96253
+    },
+    {
+      "path": "github-prior/infinitetalk/metadata.json",
+      "sha256": "f9c4eb8ce7393deaa61d570c369d2ed493236b0a2b87dcc1dcd62c02da841427",
+      "bytes": 76576
+    },
+    {
+      "path": "github-prior/ipftrace2/metadata.json",
+      "sha256": "89642a15813bf3f2dd3aed1c16996dbbcf112827045db61662407dc6a4fbb323",
+      "bytes": 75777
+    },
+    {
+      "path": "github-prior/linphone/metadata.json",
+      "sha256": "b0c025d11659300f44c9680d79842d21cd33d22133a97afcdad6de3aab329e08",
+      "bytes": 155333
+    },
+    {
+      "path": "github-prior/meta-cookbook/metadata.json",
+      "sha256": "ad388d0fb739801dca374e81ba04bdc221f32c009479dafc43fdeb9bff8eb130",
+      "bytes": 589475
+    },
+    {
+      "path": "github-prior/pixelle/metadata.json",
+      "sha256": "f667fabd6197adf0d9887f5f922218b1eb90a018d18bd9e2b3415d6432ac238b",
+      "bytes": 142762
+    },
+    {
+      "path": "github-prior/reddit-video/metadata.json",
+      "sha256": "d294630b39c1c9ef2367399fd6a3fdbe6aa8f2778117a212df5070f5c47bbe05",
+      "bytes": 126520
+    },
+    {
+      "path": "github-prior/remotion/metadata.json",
+      "sha256": "4a11f02ba335ed486cf6e74984c8178f02f7d07ceef6707b0872b7ea6b074a86",
+      "bytes": 1068295
+    },
+    {
+      "path": "github-prior/runninghub/metadata.json",
+      "sha256": "880d8f521aa37c427b75930361077a74e6acb34dff9a78a340b71dd3a4f5d525",
+      "bytes": 48524
+    },
+    {
+      "path": "github-prior/videocaptioner/metadata.json",
+      "sha256": "22418b1f5065c03b13407a793aaa5ce6cf8dd868f6a440af59cdd181647c7420",
+      "bytes": 167612
+    },
+    {
+      "path": "github-prior/videocode/metadata.json",
+      "sha256": "fc42aa4a4a1eb8cbb5a6df4758597aef37bf58064625f8616477561c36e30054",
+      "bytes": 53792
+    },
+    {
+      "path": "github-prior/videorecorder/metadata.json",
+      "sha256": "ad97c9f94d3ca6ba89ed11281311f8acf7cd03fe5dc64a687678df5611dad851",
+      "bytes": 64377
+    },
+    {
+      "path": "github-prior/voip-privacy/metadata.json",
+      "sha256": "b8cf1b3ab2b2524763667083cbfc535d502e3333416f5ac916045234475747bb",
+      "bytes": 90557
+    },
+    {
+      "path": "github-prior/voip-sample/metadata.json",
+      "sha256": "cac781647e9d96ef1094aa177d2b511a1d97f2e6f49076dced2af1dc91cd22ae",
+      "bytes": 87337
+    },
+    {
+      "path": "github-prior/wifi-cracker/metadata.json",
+      "sha256": "af77fdbf9dd16105e3165eda2e211c90ad8369ef6d054f4ff4cf9e681df6509e",
+      "bytes": 52025
+    },
+    {
+      "path": "github-prior/youtube-dl/metadata.json",
+      "sha256": "82ac9e5ccb2aab2cea7fae9ced3fb652c97fe17adf9c0ae7e9c8add087fdec7a",
+      "bytes": 254151
+    },
+    {
+      "path": "local-database-metadata.json",
+      "sha256": "c99dc1cff2defb889bf2063187fe139ec7955f9ff400bb572ded088f2ee79af4",
+      "bytes": 6968
+    },
+    {
+      "path": "prior-collection.log",
+      "sha256": "85b11c62fe99cf88bc90a7d00b0ea18c06718555e7a567dae2b80236276313e0",
+      "bytes": 2196
+    },
+    {
+      "path": "prior-resources.json",
+      "sha256": "9c953064f6e188db049fd051594f89a25e4c9df4c0e88fb436ecee4dd7cf10f0",
+      "bytes": 6731
+    },
+    {
+      "path": "resources.json",
+      "sha256": "b9b954e9b80d9d7c331ec9afda4cb843541213122ec9ba5ad240e77386408f2b",
+      "bytes": 5241
+    },
+    {
+      "path": "supporting-github/TestSprite__testsprite-cli.json",
+      "sha256": "93566d127802c897e5d07dfe967f619a538d198f30df7b628c16995530b8a6d5",
+      "bytes": 73227
+    },
+    {
+      "path": "supporting-github/supabase__supabase.json",
+      "sha256": "2bf7282975bcb9ea6fac17e177db6ff48bf08fe385953b66c5eb06098a120b97",
+      "bytes": 54052
+    },
+    {
+      "path": "supporting-github/superdesigndev__treg.json",
+      "sha256": "99daf94ca2a40bc5e55a65f19ae5a441625cc30b727b61f17543509521989ed0",
+      "bytes": 77638
+    },
+    {
+      "path": "repository-audit/npm-audit.json",
+      "sha256": "abeb14e234a4d4d510269282268a2d087c09a6488dc281fa2927b8a590f6e439",
+      "bytes": 108416
+    },
+    {
+      "path": "repository-audit/npm-audit-production.json",
+      "sha256": "6e0a83922280045ecd885c5e625ad731dc0a6a094aef9b52a6d512578024942e",
+      "bytes": 71728
+    },
+    {
+      "path": "repository-audit/direct-licenses.json",
+      "sha256": "373d2903e5363fb75a57e7c00888a223456e88c81006c2072267a7a4577f4ee0",
+      "bytes": 19743
+    },
+    {
+      "path": "repository-audit/lock-license-inventory.json",
+      "sha256": "b42d9f76f6d1e4136102748e94e24fd69578b15c4de142537429e5ec5e4e2c7c",
+      "bytes": 192651
+    },
+    {
+      "path": "docs/audit/agentos-phase0/preservation-check.json",
+      "sha256": "eeeba3c0c2b17ce7d05e1ddd359bab77fcf20d55180b27ff1a6b7c272c462224",
+      "bytes": 871
+    }
+  ]
+}

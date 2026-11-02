@@ -93,6 +93,15 @@ export function proxy(req: NextRequest) {
   // ── Echo the request ID back on the response ───────────────────────
   response.headers.set("x-request-id", requestId);
 
+  // Arena's preview is embedded by the user's browser on a different origin.
+  // Keep production clickjacking protection, but allow the preview proxy in dev.
+  if (process.env.NODE_ENV !== "production") {
+    const headers = { ...SECURITY_HEADERS };
+    delete headers["X-Frame-Options"];
+    headers["Content-Security-Policy"] = headers["Content-Security-Policy"].replace("frame-ancestors 'none'", "frame-ancestors 'self' https://*.e2b.app https://*.space-z.ai").replace("; upgrade-insecure-requests", "");
+    for (const [key, value] of Object.entries(headers)) response.headers.set(key, value);
+    return response;
+  }
   // ── Security headers ───────────────────────────────────────────────
   for (const [key, value] of Object.entries(SECURITY_HEADERS)) {
     response.headers.set(key, value);

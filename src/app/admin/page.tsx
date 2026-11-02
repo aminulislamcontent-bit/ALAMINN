@@ -8,6 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { PageHeader, ErrorState } from "@/components/admin/page-primitives";
 import { adminFetch, fmtDate } from "@/components/admin/lib";
+import { FeatureKitLaunchpad } from "@/components/admin/kits/launchpad";
 import {
   Users, CheckSquare, Newspaper, TrendingUp, Mail,
   ArrowUpRight, Activity,
@@ -124,7 +125,8 @@ export default function AdminDashboardPage() {
     return (
       <div>
         <PageHeader title="Executive Dashboard" subtitle="Aggregated KPIs across your platform" />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+        <FeatureKitLaunchpad />
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-8">
           {Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} className="h-28" />)}
         </div>
         <Skeleton className="h-64" />

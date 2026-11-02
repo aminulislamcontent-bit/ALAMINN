@@ -11,7 +11,7 @@ import {
   Globe2, MapPin, BookOpen, Award, Library, UserSquare2, Microscope,
   FlaskConical, CalendarDays, GraduationCap, ClipboardList, HelpCircle, Mail,
   MessageCircle, Share2, Inbox, UserRound, CalendarClock as CalIcon, Megaphone, ListChecks,
-  Activity, Sparkles, Briefcase,
+  Activity, Sparkles, Briefcase, Workflow, Kanban, SearchCheck, PenLine, Mails, ChartNoAxesCombined, Clapperboard, MessagesSquare, Plug,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -40,6 +40,21 @@ const NAV_GROUPS: {
     items: [
       { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
       { href: "/admin/notifications", label: "Notifications", icon: Bell },
+    ],
+  },
+  {
+    label: "Integrated Kits",
+    items: [
+      { href: "/admin/diagrams", label: "Diagram Designer", icon: Workflow },
+      { href: "/admin/crm", label: "CRM Pipeline", icon: Kanban },
+      { href: "/admin/marketing", label: "Marketing Campaigns", icon: Megaphone },
+      { href: "/admin/seo-dashboard", label: "SEO Engine Audit", icon: SearchCheck },
+      { href: "/admin/ai-assistant/humanizer", label: "Content Humanizer", icon: PenLine },
+      { href: "/admin/email-builder", label: "Email Builder", icon: Mails },
+      { href: "/admin/analytics-dashboard", label: "System Analytics", icon: ChartNoAxesCombined },
+      { href: "/admin/video-studio", label: "Video Studio", icon: Clapperboard },
+      { href: "/admin/social-scheduler", label: "Social Scheduler", icon: CalendarClock },
+      { href: "/admin/live-chat", label: "Live Support Desk", icon: MessagesSquare },
     ],
   },
   {
@@ -124,6 +139,7 @@ const NAV_GROUPS: {
       { href: "/admin/audit-logs", label: "Audit Logs", icon: ScrollText },
       { href: "/admin/roles", label: "Roles & Perms", icon: UserCog },
       { href: "/admin/users", label: "Users", icon: Users },
+      { href: "/admin/integrations", label: "Integration Hub", icon: Plug },
       { href: "/admin/settings", label: "Settings", icon: Settings },
     ],
   },

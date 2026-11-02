@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import { Toaster as SonnerToaster } from "sonner";
 import { ThemeProvider } from "next-themes";
 import { RegisterSW } from "@/components/site/pwa/register-sw";
 
@@ -217,6 +218,7 @@ export default function RootLayout({
           />
           {children}
           <Toaster />
+          <SonnerToaster richColors position="top-right" />
           <RegisterSW />
         </ThemeProvider>
       </body>

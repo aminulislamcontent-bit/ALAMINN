@@ -1,3 +1,9 @@
+> **Current feature-kit release:** use the provider-specific configurations and
+> histories documented in [`prisma/migrations/README.md`](../prisma/migrations/README.md).
+> SQLite uses `prisma.config.ts`; MySQL uses `prisma.config.mysql.ts`.
+> Do not use `db push --accept-data-loss` for deployment. Existing MySQL
+> databases need a staging drift review and migration-history reconciliation.
+
 # DATABASE MIGRATION GUIDE
 
 Verified 2026-09-30. Complements `docs/database.md` and `docs/backup-restore.md`.

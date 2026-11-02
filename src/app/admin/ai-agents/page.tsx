@@ -482,7 +482,7 @@ export default function FreeAiAgentsHubPage() {
               <span>Dedicated Dashboard Agents</span>
               <Bot className="h-4 w-4 text-orange-500" />
             </CardDescription>
-            <CardTitle className="text-2xl">{data?.agents.length ?? 52}</CardTitle>
+            <CardTitle className="text-2xl">{data?.agents.length ?? 63}</CardTitle>
           </CardHeader>
           <CardContent className="text-xs text-muted-foreground">
             100% coverage across all 8 Admin Command groups
@@ -542,7 +542,7 @@ export default function FreeAiAgentsHubPage() {
         <TabsList className="flex flex-wrap h-auto gap-1 p-1">
           <TabsTrigger value="agents" className="gap-1.5">
             <Bot className="h-4 w-4" />
-            All Dashboard Agents ({data?.agents.length ?? 52})
+            All Dashboard Agents ({data?.agents.length ?? 63})
           </TabsTrigger>
           <TabsTrigger value="providers" className="gap-1.5">
             <KeyRound className="h-4 w-4" />
@@ -558,7 +558,7 @@ export default function FreeAiAgentsHubPage() {
           </TabsTrigger>
         </TabsList>
 
-        {/* TAB 1: ALL 52 ADMIN DASHBOARD AGENTS */}
+        {/* TAB 1: ALL 63 ADMIN DASHBOARD AGENTS */}
         <TabsContent value="agents" className="space-y-4">
           <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">
             <div className="relative w-full sm:max-w-sm">
@@ -566,7 +566,7 @@ export default function FreeAiAgentsHubPage() {
               <Input
                 value={agentSearch}
                 onChange={(e) => setAgentSearch(e.target.value)}
-                placeholder="Search 52 dashboard agents by name, route, or role…"
+                placeholder="Search 63 dashboard agents by name, route, or role…"
                 className="pl-9"
               />
             </div>

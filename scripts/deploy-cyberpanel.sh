@@ -6,7 +6,7 @@
 #
 #  WHAT THIS DOES (in order):
 #    1.  Pre-flight checks (root/sudo, .env present, Node 20+, MariaDB up)
-#    2.  Swap Prisma schema to MySQL provider (schema.mysql.prisma)
+#    2.  Use the provider-specific MySQL config
 #    3.  Install production npm dependencies
 #    4.  Generate Prisma client for MySQL
 #    5.  Push schema to MariaDB (creates all tables)
@@ -76,16 +76,9 @@ if ! grep -q '^DATABASE_URL="mysql://' .env; then
 fi
 ok "Pre-flight passed (Node $(node -v))"
 
-# ── 1. Swap Prisma schema to MySQL ──────────────────────────────────
-log "Activating MariaDB Prisma schema"
-if [[ ! -f prisma/schema.mysql.prisma ]]; then
-  die "prisma/schema.mysql.prisma not found. Ensure the full repo is deployed."
-fi
-# Back up the SQLite schema (so local dev can restore it if needed)
-cp -f prisma/schema.prisma prisma/schema.sqlite.prisma.bak 2>/dev/null || true
-# Activate the MySQL schema
-cp -f prisma/schema.mysql.prisma prisma/schema.prisma
-ok "schema.prisma is now MySQL/MariaDB (SQLite backup at prisma/schema.sqlite.prisma.bak)"
+# ── 1. Keep provider-specific schemas separate ─────────────────────
+log "Using prisma/schema.mysql.prisma via prisma.config.mysql.ts"
+[[ -f prisma/schema.mysql.prisma ]] || die "Missing prisma/schema.mysql.prisma"
 
 # ── 2. Install dependencies ─────────────────────────────────────────
 log "Installing production dependencies"
@@ -99,12 +92,12 @@ ok "Dependencies installed"
 
 # ── 3. Generate Prisma client ───────────────────────────────────────
 log "Generating Prisma client (MySQL)"
-npx prisma generate
+npx prisma generate --config prisma.config.mysql.ts
 ok "Prisma client generated"
 
 # ── 4. Push schema to MariaDB ───────────────────────────────────────
-log "Pushing schema to MariaDB (creates/updates tables)"
-npx prisma db push --accept-data-loss
+log "Applying reviewed MySQL migrations (no data-loss flags)"
+npx prisma migrate deploy --config prisma.config.mysql.ts
 ok "Database schema applied"
 
 # ── 5. Seed (optional, first deploy) ────────────────────────────────

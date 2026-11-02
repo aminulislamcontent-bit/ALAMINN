@@ -50,20 +50,20 @@ fi
 if [[ $DO_BUILD -eq 1 ]]; then
   log "Generating Prisma client"
   if [[ "$PKG_MGR" == "npm" ]]; then
-    npx prisma generate
+    npx prisma generate --config prisma.config.mysql.ts
   else
-    bunx prisma generate
+    bunx prisma generate --config prisma.config.mysql.ts
   fi
   ok "Prisma client generated"
 fi
 
-# 3. Push schema
+# 3. Apply versioned migrations
 if [[ $DO_BUILD -eq 1 ]]; then
-  log "Pushing schema to MySQL"
+  log "Applying versioned MySQL migrations"
   if [[ "$PKG_MGR" == "npm" ]]; then
-    npx prisma db push --accept-data-loss
+    npx prisma migrate deploy --config prisma.config.mysql.ts
   else
-    bunx prisma db push --accept-data-loss
+    bunx prisma migrate deploy --config prisma.config.mysql.ts
   fi
   ok "Schema applied"
 fi

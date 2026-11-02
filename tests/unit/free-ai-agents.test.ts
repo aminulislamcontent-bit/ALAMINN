@@ -65,14 +65,14 @@ const PUBLIC_ADMIN_AUTH_ROUTES = new Set([
   "/admin/reset-password",
 ]);
 
-describe("Admin Dashboard AI Agents Registry (all 52 dashboards)", () => {
-  it("registers 52 unique dashboard agents across all 8 module groups", () => {
-    expect(DASHBOARD_AGENTS.length).toBe(52);
+describe("Admin Dashboard AI Agents Registry (all 63 dashboards)", () => {
+  it("registers 63 unique dashboard agents across all 9 module groups", () => {
+    expect(DASHBOARD_AGENTS.length).toBe(63);
     const ids = new Set(DASHBOARD_AGENTS.map((a) => a.id));
     const routes = new Set(DASHBOARD_AGENTS.map((a) => a.route));
-    expect(ids.size).toBe(52);
-    expect(routes.size).toBe(52);
-    expect(DASHBOARD_AGENT_GROUPS.length).toBe(8);
+    expect(ids.size).toBe(63);
+    expect(routes.size).toBe(63);
+    expect(DASHBOARD_AGENT_GROUPS.length).toBe(9);
   });
 
   it("maps every authenticated /admin/**/page.tsx in the repository to its own dedicated agent", () => {
@@ -80,7 +80,7 @@ describe("Admin Dashboard AI Agents Registry (all 52 dashboards)", () => {
     const pageRoutes = collectAdminRoutes(adminDir).filter(
       (r) => !PUBLIC_ADMIN_AUTH_ROUTES.has(r)
     );
-    expect(pageRoutes.length).toBe(52);
+    expect(pageRoutes.length).toBe(63);
 
     for (const route of pageRoutes) {
       const normalizedSample = route.replace(/\[[^\]]+\]/g, "sample-id");

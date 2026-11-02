@@ -18,12 +18,13 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Generate Prisma client (uses schema.prisma — swap to MySQL for prod).
+# Generate the SQLite client for the default/libSQL build. MySQL hosts use
+# prisma.config.mysql.ts and generate the native MySQL client during deployment.
 RUN npx prisma generate
 
 # Build Next.js (standalone output) using an ephemeral initialized SQLite schema for static generation.
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN DATABASE_URL="file:/tmp/build.db" npx prisma db push --skip-generate && \
+RUN DATABASE_URL="file:/tmp/build.db" npx prisma migrate deploy && \
     DATABASE_URL="file:/tmp/build.db" npm run build && \
     rm -f /tmp/build.db /tmp/build.db-journal /tmp/build.db-wal /tmp/build.db-shm
 
