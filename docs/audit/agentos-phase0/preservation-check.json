@@ -1,0 +1,12 @@
+{
+  "date": "2026-11-02",
+  "baselineCommit": "02eb68762ac4e3712eb9025ea3c8a7d9fa28760f",
+  "baselineFilesChecked": 889,
+  "unchanged": 889,
+  "changed": [],
+  "missing": [],
+  "requiredReportsPresent": 14,
+  "badLocalLinks": [],
+  "gitStatusPorcelain": "?? docs/AGENT_SYSTEM.md\n?? docs/AUTONOMOUS_SOFTWARE_FACTORY.md\n?? docs/DEPLOYMENT_RUNBOOK.md\n?? docs/IMPLEMENTATION_ROADMAP.md\n?? docs/INFRASTRUCTURE_PLAN.md\n?? docs/LICENSE_COMPLIANCE.md\n?? docs/MASTER_ARCHITECTURE.md\n?? docs/MEMORY_ARCHITECTURE.md\n?? docs/QA_AND_TESTING.md\n?? docs/RESOURCE_AUDIT.md\n?? docs/RESOURCE_COMPATIBILITY_MATRIX.md\n?? docs/REVERSE_ENGINEERING_LAB.md\n?? docs/RISK_REGISTER.md\n?? docs/SECURITY_ARCHITECTURE.md\n?? docs/audit/agentos-phase0/\n",
+  "note": "Only new documentation/audit evidence added; no application/schema/data changes. Baseline manifest predates new docs."
+}

@@ -1795,3 +1795,43 @@ model SupportMessage {
 
   @@index([conversationId, createdAt])
 }
+
+// Experimental AgentOS foundation; not wired into existing AI tasks.
+model AgentOsTask {
+  id String @db.VarChar(191) @id
+  project String @db.VarChar(191)
+  agent String @db.VarChar(191)
+  objective String @db.LongText
+  inputs String @db.LongText
+  permissions String @db.LongText
+  outputs String? @db.LongText
+  deadline DateTime
+  maxAttempts Int
+  attempts Int @default(0)
+  status String @db.VarChar(191) @default("queued")
+  leaseToken String? @db.VarChar(191)
+  leaseUntil DateTime?
+  createdBy String @db.VarChar(191)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([status, leaseUntil])
+}
+
+model AgentOsApproval {
+  id String @db.VarChar(191) @id
+  taskId String @db.VarChar(191)
+  action String @db.VarChar(191)
+  decision String @db.VarChar(191)
+  decidedBy String? @db.VarChar(191)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  @@index([taskId])
+}
+
+model AgentOsAudit {
+  sequence Int @id
+  event String @db.LongText
+  previousHash String @db.VarChar(191)
+  hash String @db.VarChar(191)
+  createdAt DateTime @default(now())
+}
