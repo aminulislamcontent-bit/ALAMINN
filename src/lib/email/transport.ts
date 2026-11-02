@@ -25,6 +25,7 @@ export type EmailMessage = {
     contentType?: string;
   }>;
   messageId?: string;
+  headers?: Record<string, string>;
 };
 
 export type EmailResult = {
@@ -44,6 +45,7 @@ type ResendMailOptions = {
   subject: string;
   html: string;
   text: string;
+  headers?: Record<string, string>;
   attachments?: Array<{
     filename: string;
     content: string;
@@ -134,6 +136,7 @@ export async function sendEmail(message: EmailMessage): Promise<EmailResult> {
         subject: message.subject,
         html: message.html,
         text: message.text,
+        headers: message.headers,
         attachments: message.attachments?.map((a) => ({
           filename: a.filename,
           content:
@@ -172,6 +175,7 @@ export async function sendEmail(message: EmailMessage): Promise<EmailResult> {
         subject: message.subject,
         html: message.html,
         text: message.text,
+        headers: message.headers,
         attachments: message.attachments,
         messageId: message.messageId,
       });

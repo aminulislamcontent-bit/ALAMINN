@@ -9,9 +9,9 @@
 #    1.  Verifies you're in the right directory (/home/aloeduca/alaminn.info)
 #    2.  Copies .env.production → .env (if .env doesn't exist yet)
 #    3.  Installs Node.js dependencies (npm install)
-#    4.  Swaps Prisma schema to MySQL provider (for MySQL 8)
+#    4.  Uses the provider-specific MySQL config
 #    5.  Generates Prisma client
-#    6.  Pushes schema to MySQL (creates all 55 tables)
+#    6.  Applies versioned MySQL migrations
 #    7.  Seeds the database (274 rows of demo content + admin user)
 #    8.  Builds Next.js standalone production bundle
 #    9.  Copies static assets into the standalone tree
@@ -94,35 +94,27 @@ else
 fi
 ok "Dependencies installed"
 
-# ── 3. Swap Prisma schema to MySQL ──────────────────────────────────────────
-log "Activating MySQL Prisma schema"
-if [[ -f "$APP_DIR/prisma/schema.mysql.prisma" ]]; then
-  # Back up the SQLite schema (so local dev can restore it if needed)
-  cp -f "$APP_DIR/prisma/schema.prisma" "$APP_DIR/prisma/schema.sqlite.prisma.bak" 2>/dev/null || true
-  # Activate the MySQL schema
-  cp -f "$APP_DIR/prisma/schema.mysql.prisma" "$APP_DIR/prisma/schema.prisma"
-  ok "schema.prisma is now MySQL (SQLite backup at prisma/schema.sqlite.prisma.bak)"
-else
-  die "prisma/schema.mysql.prisma not found. Ensure the full repo is uploaded."
-fi
+# ── 3. Select MySQL config without overwriting the SQLite schema ───────────
+log "Using provider-specific MySQL config"
+[[ -f "$APP_DIR/prisma/schema.mysql.prisma" ]] || die "Missing prisma/schema.mysql.prisma"
 
 # ── 4. Generate Prisma client ───────────────────────────────────────────────
 log "Generating Prisma client (MySQL)"
 if [[ "$PKG_MGR" == "npm" ]]; then
-  npx prisma generate
+  npx prisma generate --config prisma.config.mysql.ts
 else
-  bunx prisma generate
+  bunx prisma generate --config prisma.config.mysql.ts
 fi
 ok "Prisma client generated"
 
-# ── 5. Push schema to MySQL ─────────────────────────────────────────────────
-log "Pushing schema to MySQL (creates all 55 tables)"
+# ── 5. Apply MySQL migrations ─────────────────────────────────────────────────
+log "Applying versioned MySQL migrations"
 if [[ "$PKG_MGR" == "npm" ]]; then
-  npx prisma db push --accept-data-loss
+  npx prisma migrate deploy --config prisma.config.mysql.ts
 else
-  bunx prisma db push --accept-data-loss
+  bunx prisma migrate deploy --config prisma.config.mysql.ts
 fi
-ok "Database schema applied (55 tables created in aloeduca_alamin_crm)"
+ok "Database migrations applied"
 
 # ── 6. Seed the database ────────────────────────────────────────────────────
 log "Seeding database with initial content (274 rows)"

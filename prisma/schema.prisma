@@ -1516,6 +1516,12 @@ model SocialCampaign {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   contents    SocialContent[]
+  emailCampaigns EmailCampaign[]
+  budget      Int      @default(0)
+  currency    String   @default("USD")
+  channels    String   @default("[]")
+  brief       String?
+  utmCampaign String?
 
   @@index([status])
 }
@@ -1694,4 +1700,98 @@ model HigherStudyOfficialDocument {
   @@unique([sourceUrl, version])
   @@index([countrySlug])
   @@index([approvalStatus])
+}
+
+// ─── Integrated feature kits (additive, no existing data rewritten) ─────
+model KitDocument {
+  id          String   @id @default(cuid())
+  kind        String // diagram | humanizer | storyboard | email-template
+  title       String
+  content     String // validated JSON or plain text, depending on kind
+  metadata    String? // provider / model / tone; never credentials
+  createdById String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([kind, updatedAt])
+  @@index([createdById])
+}
+
+model SeoAudit {
+  id          String   @id @default(cuid())
+  url         String
+  score       Int
+  checks      String // JSON SeoCheck[]
+  summary     String
+  createdById String?
+  createdAt   DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+model EmailCampaign {
+  id           String         @id @default(cuid())
+  name         String
+  subject      String
+  preheader    String?
+  bodyHtml     String
+  bodyText     String
+  content      String // validated EmailContent JSON for safe personalized rendering
+  audience     String         @default("all")
+  status       String         @default("draft") // draft | queued | sending | sent | failed
+  scheduledAt  DateTime?
+  sentAt       DateTime?
+  createdById  String?
+  campaignId   String?
+  campaign     SocialCampaign? @relation(fields: [campaignId], references: [id], onDelete: SetNull)
+  deliveries   EmailDelivery[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  @@index([status, scheduledAt])
+}
+
+model EmailDelivery {
+  id           String        @id @default(cuid())
+  campaignId   String
+  campaign     EmailCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  subscriberId String
+  email        String
+  status       String        @default("pending") // pending | sending | sent | failed | skipped
+  providerId   String?
+  error        String?
+  attempts     Int           @default(0)
+  sentAt       DateTime?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@unique([campaignId, subscriberId])
+  @@index([status, updatedAt])
+}
+
+model SupportConversation {
+  id            String           @id @default(cuid())
+  visitorName   String
+  visitorEmail  String?
+  tokenHash     String           @unique
+  status        String           @default("open") // open | pending | resolved
+  assignedTo    String?
+  lastMessageAt DateTime         @default(now())
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  messages      SupportMessage[]
+
+  @@index([status, lastMessageAt])
+}
+
+model SupportMessage {
+  id             String              @id @default(cuid())
+  conversationId String
+  conversation   SupportConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender         String // visitor | agent | system
+  senderName     String
+  body           String
+  createdAt      DateTime            @default(now())
+
+  @@index([conversationId, createdAt])
 }

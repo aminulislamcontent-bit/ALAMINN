@@ -15,11 +15,19 @@ export function AutomationSwitch() {
     catch (err) { toast.error(err instanceof Error ? err.message : "Only OWNER/SUPER_ADMIN can change this."); }
     finally { setBusy(false); }
   }
+  async function togglePublishing(v: boolean) {
+    setBusy(true);
+    try { const e = await adminFetch<State>("/api/v1/admin/social/publishing", { method: "PUT", body: JSON.stringify({ enabled: v }) }); setS(e.data); toast.success(v ? "Scheduled publishing enabled." : "Scheduled publishing disabled."); }
+    catch (err) { toast.error(err instanceof Error ? err.message : "Publishing permission required."); }
+    finally { setBusy(false); }
+  }
   if (!s) return null;
   return (
     <div className="flex items-center gap-2" title={s.changedByName ? `Last changed by ${s.changedByName} · v${s.version}` : `v${s.version}`}>
       <span className={`text-xs font-semibold ${s.engagementEnabled ? "text-emerald-600" : "text-rose-600"}`}>AI Auto-Reply {s.engagementEnabled ? "ON" : "OFF"}</span>
-      <Switch checked={s.engagementEnabled} onCheckedChange={toggle} disabled={busy} aria-label="Global automation switch" />
+      <Switch checked={s.engagementEnabled} onCheckedChange={toggle} disabled={busy} aria-label="AI auto-reply switch" />
+      <span className="hidden xl:inline text-xs font-semibold border-l pl-2">Publish {s.publishingEnabled ? "ON" : "OFF"}</span>
+      <Switch className="hidden xl:inline-flex" checked={s.publishingEnabled} onCheckedChange={togglePublishing} disabled={busy} aria-label="Scheduled publishing switch" />
     </div>
   );
 }

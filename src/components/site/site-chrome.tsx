@@ -6,7 +6,7 @@ import { SearchPalette } from "./search-palette";
 import { ScheduleMeetingModal } from "./schedule-meeting-modal";
 import { ThemeToggle } from "./theme-toggle";
 import { useOpenCommandCenter } from "./command-center-bridge";
-import { WhatsAppChatWidget } from "./whatsapp/whatsapp-chat-widget";
+import { LiveSupportWidget } from "./live-support-widget";
 
 /**
  * Top-level client chrome that wires together global keyboard shortcuts,
@@ -93,7 +93,7 @@ export function SiteChrome({ isAuthed }: { isAuthed: boolean }) {
       </div>
 
       {/* WhatsApp AI chat widget — bottom-right */}
-      <WhatsAppChatWidget />
+      <LiveSupportWidget />
     </>
   );
 }

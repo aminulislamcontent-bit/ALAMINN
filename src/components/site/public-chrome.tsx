@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Menu, X, MessageCircle, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { WhatsAppChatWidget } from "@/components/site/whatsapp/whatsapp-chat-widget";
+import { LiveSupportWidget } from "@/components/site/live-support-widget";
 import { NAV_LINKS } from "@/lib/site-data";
 
 /**
@@ -188,7 +188,7 @@ export function PublicPage({ children }: { children: React.ReactNode }) {
       <PublicNav />
       <main id="main-content" className="flex-1">{children}</main>
       <PublicFooter />
-      <WhatsAppChatWidget />
+      <LiveSupportWidget />
     </div>
   );
 }
