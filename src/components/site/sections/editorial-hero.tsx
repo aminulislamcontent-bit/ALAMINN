@@ -4,7 +4,7 @@ import { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight, MapPin, GraduationCap, Sparkles } from "lucide-react";
+import { ArrowUpRight, MapPin, GraduationCap } from "lucide-react";
 
 /**
  * EditorialHero — immersive editorial hero with destination transition.
@@ -124,11 +124,6 @@ export function EditorialHero() {
           <span className="type-meta text-white/70">
             <MapPin className="inline w-3 h-3 mr-2" />
             Global Education · Admissions · Guidance
-          </span>
-          <span className="hidden sm:block h-px w-12 bg-white/30" />
-          <span className="type-meta text-white/70 flex items-center gap-2">
-            <Sparkles className="w-3 h-3" />
-            {DESTINATIONS.length} destinations · {new Date().getFullYear()}
           </span>
         </motion.div>
 
